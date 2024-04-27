@@ -1,0 +1,275 @@
+/* Defining CSS variables in :root */
+:root {
+    --color-env: #e91e63; /* Pink color */
+    --color-env2: #d81b60; /* Darker shade of pink */
+    --color-flap: #c2185b; /* Flap color in pink */
+    --color-bg: #f3e5f5; /* Background color */
+    --color-heart: #d44ab2; /* Heart color, also pinkish */
+
+    --env-border-radius: 6px;
+    --env-width: 280px;
+    --env-height: 180px;
+    --heart-width: 50px;
+}
+
+/* Envelope styling */
+#envelope {
+    position: relative;
+    width: 280px; /* Envelope width */
+    height: auto; /* Envelope height */
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 100px; /* Reduced space from the top */
+    background-color: var(--color-env); /* Use new pink color */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.flap {
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 82px solid transparent;
+    border-top: 98px solid var(--color-flap); /* Pink flap */
+    transform-origin: top;
+    pointer-events: none;
+}
+
+.pocket {
+    border-left: 140px solid var(--color-env);
+    border-right: 140px solid var(--color-env);
+    border-bottom: 90px solid var(--color-env2); /* Pink pocket */
+    border-top: 90px solid transparent;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+.front {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 3;
+}
+
+.flap {
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 82px solid transparent;
+    border-top: 98px solid #005c84;
+    transform-origin: top;
+    pointer-events: none;
+}
+
+.pocket {
+    border-left: 140px solid #e91e63;
+    border-right: 140px solid #e91e63;
+    border-bottom: 90px solid #006a9e;
+    border-top: 90px solid transparent;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.letter {
+    background-color: #fff;
+    position: relative;
+    width: 252px; /* 90% of 280px */
+    height: 162px; /* 90% of 180px */
+    margin: 9px auto; /* center with 10% padding */
+    border-radius: 6px;
+    box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+}
+
+.words {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    background-color: #EEEFF0;
+}
+
+.words.line1 {
+    top: 15%;
+    height: 7%;
+}
+
+.words.line2 {
+    top: 30%;
+    height: 14%;
+}
+
+.words.line3 {
+    top: 50%;
+    height: 14%;
+}
+
+.words.line4 {
+    top: 70%;
+    height: 14%;
+}
+
+.close .flap {
+    transform: rotateX(0deg);
+    transition: transform 0.4s 0.6s ease, z-index 1s;
+    z-index: 5;
+}
+
+.open .flap {
+    transform: rotateX(180deg);
+    transition: transform 0.4s ease, z-index 0.6s;
+    z-index: 1;
+}
+
+.close .letter {
+    transform: translateY(0px);
+    transition: transform 0.4s ease, z-index 1s;
+    z-index: 1;
+}
+
+.open .letter {
+    transform: translateY(-60px); /* height / 3 */
+    transition: transform 0.4s 0.6s ease, z-index 0.6s;
+    z-index: 2;
+}
+
+.open .heart {
+    opacity: 1;
+    animation: slideUp 4s linear, sideSway 2s ease-in-out infinite alternate; }
+    @keyframes slideUp {
+        from {
+            transform: translateY(0);
+        }
+        to {
+            transform: translateY(-100px); /* Adjust this value to control heart movement */
+        }
+    }
+    
+    @keyframes sideSway {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(10px); /* Example sway animation */
+        }
+    }
+    @keyframes heartPop {
+        from {
+            opacity: 0;
+            transform: scale(0);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1); /* Adjust the scaling for the desired effect */
+        }
+    }
+    
+    .hearts {
+        position: absolute;
+        bottom: 100px; /* Adjust to position the hearts appropriately */
+        left: 100px; /* Start position */
+        right: auto;
+        z-index: 2;
+        display: flex;
+        justify-content: space-around; /* Distribute hearts evenly */
+    }
+    
+    .heart {
+        position: absolute;
+        top: 10px; /* Adjusted position within the container */
+        pointer-events: none;
+        opacity: 0;
+        animation: heartPop 0.5s ease-in-out; /* Base animation */
+    }
+    
+    .heart.heart1 {
+        animation-delay: 0.1s; /* First heart delay */
+    }
+    
+    .heart.heart2 {
+        animation-delay: 0.2s; /* Second heart delay */
+    }
+    
+    .heart.heart3 {
+        animation-delay: 0.3s; /* Third heart delay */
+    }
+    
+    .heart.heart4 {
+        animation-delay: 0.4s; /* Fourth heart delay */
+    }
+    
+    .heart.heart5 {
+        animation-delay: 0.5s; /* Fifth heart delay */
+    }
+    
+
+.heart:before,
+.heart:after {
+    position: absolute;
+    content: "";
+    left: 50px; /* defined heart-width */
+    top: 0px;
+    width: 50px;
+    height: 80px; /* heart-width * 1.6 */
+    background: #D00000; /* heart color */
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    pointer-events: none;
+}
+
+.heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+body {
+    background-color: var(--color-bg); /* Background color */
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.envelope-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 90vh; /* Reduced height to fit everything on one page */
+    padding: 0; /* Ensure no extra padding */
+}
+
+
+.reset {
+    text-align: center;
+    margin-top: 10px; /* Reduced to bring it closer to the envelope */
+    z-index: 10;
+    position: relative;
+}
+
+.reset button {
+    font-weight: 800;
+    transition: all 0.1s linear;
+    background-color: transparent;
+    border: solid 2px #0077B2;
+    border-radius: 4px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+
+.reset button:hover {
+    background-color: #0077B2;
+    color: white;
+}
+
+.heart.heart1 {
+    animation-delay: 0.1s; /* First heart delay */
+}
+
+.heart.heart2 {
+    animation-delay: 0.2s; /* Second heart delay */
+}
+
+.heart.heart3 {
+    animation-delay: 0.3s; /* Third heart delay */
+}
+
